@@ -80,13 +80,13 @@ The third version experiments with culling as an alternative approach to reduce 
 
 The project was developed independently from a set of cancer cell simulation data provided by a professor.
 
-The task was to create a 3D visualization based on the provided data and an example of the desired visual representation. Java was chosen as the implementation language with the intended maintainability and accessibility of the code in mind.
+The task was to create a 3D visualization based on the provided data and an example of the desired visual representation.
 
 ## Example Data
 
 An example dataset is included in example_data/example_cells_5000.dat.
 
-The dataset contains 5,000 cells and is provided for testing and demonstrating the visualization without distributing the original simulation data.
+The dataset contains 5,000 cells and is provided for testing and demonstrating the visualization without sharing the original simulation data.
 
 ## Status
 
