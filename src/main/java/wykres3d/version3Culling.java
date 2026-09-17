@@ -72,14 +72,14 @@ public class version3Culling {
 		buttonPanel.add(wykresButton);
 		buttonPanel.add(widocznoscOsiButton);
 
-		JLabel label = new JLabel("Ścieżka do pliku:");
-		label.setHorizontalTextPosition(JLabel.CENTER);
-		label.setVerticalTextPosition(JLabel.CENTER);
+		//JLabel label = new JLabel("Ścieżka do pliku:");
+		//label.setHorizontalTextPosition(JLabel.CENTER);
+		//label.setVerticalTextPosition(JLabel.CENTER);
 
 		JPanel controlPanel = new JPanel();
 		controlPanel.setLayout(new GridLayout(2, 1));
 		controlPanel.add(buttonPanel);
-		controlPanel.add(label);
+		//controlPanel.add(label);
 
 		daneButton.addActionListener(new ActionListener() {
 			@Override
@@ -94,8 +94,8 @@ public class version3Culling {
 					File wybranyPlik = fileChooser.getSelectedFile();
 					// JOptionPane.showMessageDialog(frame, "Wybrano plik: " +
 					// wybranyPlik.getAbsolutePath());
-					label.setForeground(java.awt.Color.RED);
-					label.setText(wybranyPlik.getAbsolutePath());
+					//label.setForeground(java.awt.Color.RED);
+					//label.setText(wybranyPlik.getAbsolutePath());
 
 					if (!wybranyPlik.getName().toLowerCase().endsWith(".dat")) {
 						JOptionPane.showMessageDialog(frame, "Spróbuj ponownie. Wybierz plik .dat", "Błąd",
@@ -110,7 +110,7 @@ public class version3Culling {
 		wykresButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				label.setForeground(java.awt.Color.GREEN);
+				//label.setForeground(java.awt.Color.GREEN);
 				generowanieWykresu();
 				panel.repaint();
 				//System.out.println("Canvas class: " + chart.getCanvas().getClass().getName());
