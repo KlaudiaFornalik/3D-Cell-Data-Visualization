@@ -8,7 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
-//import java.util.Random;
 import java.util.Scanner;
 
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -27,24 +26,13 @@ public class version2Colors {
 	static Coord3dColors[] pointsArray;
 	static Quality q = Quality.Advanced();
 	static SwingChartFactory factory = new SwingChartFactory();
-	//static AWTChartFactory factory = new AWTChartFactory();
 	static Chart chart = factory.newChart(q);
-	//static Chart chart = AWTChartFactory.chart(Quality.Advanced());
 
 	static final int NO_COLOR = -1;
 
 	public static void main(String[] args) {
-		// random data for referance
-		/*
-		 * float x, y, z; Random rand = new Random(); for (int i = 0; i < 1000; i++) { x
-		 * = rand.nextFloat() * 10; y = rand.nextFloat() * 10; z = rand.nextFloat() *
-		 * 10; coordinates.add(new Coord3dColors(x, y, z)); } for (int i = 0; i <
-		 * coordinates.size(); i++) { System.out.println( "x = " + coordinates.get(i).x
-		 * + " y = " + coordinates.get(i).y + " z = " + coordinates.get(i).z); }
-		 */
 
 		chart.getView().setBackgroundColor(Color.WHITE);
-		// chart.addMouse();
 		chart.addController(new UniformChartMouseController(chart));
 		
 		initColorGradient();
@@ -81,8 +69,6 @@ public class version2Colors {
 
 				if (returnValue == JFileChooser.APPROVE_OPTION) {
 					File wybranyPlik = fileChooser.getSelectedFile();
-					// JOptionPane.showMessageDialog(frame, "Wybrano plik: " +
-					// wybranyPlik.getAbsolutePath());
 					label.setForeground(java.awt.Color.RED);
 					label.setText(wybranyPlik.getAbsolutePath());
 
@@ -102,7 +88,6 @@ public class version2Colors {
 				label.setForeground(java.awt.Color.GREEN);
 				generowanieWykresu();
 				panel.repaint();
-				//System.out.println("Canvas class: " + chart.getCanvas().getClass().getName());
 
 			}
 		});
@@ -126,11 +111,7 @@ public class version2Colors {
 		frame.add(panel);
 		frame.pack();
 		frame.setLocationRelativeTo(null);
-		// frame.setAlwaysOnTop(true);
 		frame.setVisible(true);
-		// frame.toFront();
-		// frame.requestFocus();
-		// frame.setAlwaysOnTop(false);
 	}
 
 	// load data
@@ -157,11 +138,6 @@ public class version2Colors {
 				}
 			}
 			JOptionPane.showMessageDialog(null, "Wczytano " + coordinates.size() + " punktów!");
-			/*
-			 * for (int i = 0; i < coordinates.size(); i++) {
-			 * System.out.print(coordinates.get(i).x + " " + coordinates.get(i).y + " " +
-			 * coordinates.get(i).z + "\n"); }
-			 */
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(null, "Błąd odczytu pliku!", "Błąd", JOptionPane.ERROR_MESSAGE);
 		}
@@ -173,14 +149,6 @@ public class version2Colors {
 		pointsArray = coordinates.toArray(new Coord3dColors[0]); // Coord3dColors must be an array
 
 		chart.getScene().getGraph().getAll().clear();
-		
-
-		/*
-		 * while (!chart.getScene().getGraph().getAll().isEmpty()) {
-		 * chart.getScene().getGraph().remove(chart.getScene().getGraph().getAll().get(0
-		 * )); }
-		 */
-		
 		int minColor = Integer.MAX_VALUE;
 		int maxColor = Integer.MIN_VALUE;
 		
@@ -198,19 +166,6 @@ public class version2Colors {
 		}
 			
 		float cubeSize = 1.0f; // Adjust size based on data spacing, I have int
-		/*ArrayList<Composite> cubes = new ArrayList<>();
-
-		for (Coord3dColors point : pointsArray) {
-			//cubes.add(createCube(point, cubeSize));
-			if (hasColorColumn) {
-				Color cubeColor = mapColorCached(point.color, minColor, maxColor);
-				cubes.add(createCube(point, cubeSize, cubeColor));
-			}
-			else {
-				cubes.add(createCube(point, cubeSize, Color.GRAY));
-			}
-		}
-		chart.getScene().add(cubes);*/
 		
 		Composite allCubes = new Shape();
 

@@ -38,8 +38,7 @@ public class version1 {
 		 * + " y = " + coordinates.get(i).y + " z = " + coordinates.get(i).z); }
 		 */
 
-		chart.getView().setBackgroundColor(Color.WHITE);
-		// chart.addMouse();
+		chart.getView().setBackgroundColor(Color.WHITE);;
 		chart.addController(new UniformChartMouseController(chart));
 
 		// swing frame
@@ -74,8 +73,6 @@ public class version1 {
 
 				if (returnValue == JFileChooser.APPROVE_OPTION) {
 					File wybranyPlik = fileChooser.getSelectedFile();
-					// JOptionPane.showMessageDialog(frame, "Wybrano plik: " +
-					// wybranyPlik.getAbsolutePath());
 					label.setForeground(java.awt.Color.RED);
 					label.setText(wybranyPlik.getAbsolutePath());
 
@@ -117,11 +114,7 @@ public class version1 {
 		frame.add(panel);
 		frame.pack();
 		frame.setLocationRelativeTo(null);
-		// frame.setAlwaysOnTop(true);
 		frame.setVisible(true);
-		// frame.toFront();
-		// frame.requestFocus();
-		// frame.setAlwaysOnTop(false);
 	}
 
 	// load data
@@ -141,11 +134,6 @@ public class version1 {
 				}
 			}
 			JOptionPane.showMessageDialog(null, "Wczytano " + coordinates.size() + " punktów!");
-			/*
-			 * for (int i = 0; i < coordinates.size(); i++) {
-			 * System.out.print(coordinates.get(i).x + " " + coordinates.get(i).y + " " +
-			 * coordinates.get(i).z + "\n"); }
-			 */
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(null, "Błąd odczytu pliku!", "Błąd", JOptionPane.ERROR_MESSAGE);
 		}
@@ -157,11 +145,6 @@ public class version1 {
 		pointsArray = coordinates.toArray(new Coord3d[0]); // Coord3d must be an array
 
 		chart.getScene().getGraph().getAll().clear();
-		/*
-		 * while (!chart.getScene().getGraph().getAll().isEmpty()) {
-		 * chart.getScene().getGraph().remove(chart.getScene().getGraph().getAll().get(0
-		 * )); }
-		 */
 
 		float cubeSize = 1.0f; // Adjust size based on data spacing, I have int
 		ArrayList<Composite> cubes = new ArrayList<>();
@@ -210,83 +193,3 @@ public class version1 {
 		return cube;
 	}
 }
-
-/*class UniformChartMouseController extends AWTCameraMouseController {
-	private Chart chart;
-
-	public UniformChartMouseController(Chart chart) {
-		super(chart);
-		this.chart = chart;
-	}
-
-	@Override
-	public void mouseWheelMoved(MouseWheelEvent e) {
-		if (threadController != null)
-			threadController.stop();
-
-		float factor = (e.getWheelRotation() < 0) ? 0.9f : 1.1f;
-
-		View view = chart.getView();
-		BoundingBox3d currentBounds = view.getBounds();
-
-		Coord3d center = currentBounds.getCenter();
-		float xRange = (currentBounds.getXmax() - currentBounds.getXmin()) / 2;
-		float yRange = (currentBounds.getYmax() - currentBounds.getYmin()) / 2;
-		float zRange = (currentBounds.getZmax() - currentBounds.getZmin()) / 2;
-
-		BoundingBox3d newBounds = new BoundingBox3d(center.x - xRange * factor, // Xmin
-				center.x + xRange * factor, // Xmax
-				center.y - yRange * factor, // Ymin
-				center.y + yRange * factor, // Ymax
-				center.z - zRange * factor, // Zmin
-				center.z + zRange * factor // Zmax
-		);
-
-		view.setBoundManual(newBounds);
-		chart.render();
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		prevMouse = new Coord2d(e.getX(), e.getY());
-	}
-
-	@Override
-	public void mouseDragged(MouseEvent e) {
-		Coord2d mouse = new Coord2d(e.getX(), e.getY()); // current coordinates
-		Coord2d move = mouse.sub(prevMouse); // subtracts the coordinates stored in prevMouse (mousePressed) from the
-												// current mouse coordinates (mouse)
-
-		View view = chart.getView();
-		BoundingBox3d currentBounds = view.getBounds(); // currently visible region
-
-		float rangeX = currentBounds.getXmax() - currentBounds.getXmin();
-		float rangeY = currentBounds.getYmax() - currentBounds.getYmin();
-
-		float baseFactor = 0.02f;
-        float zoomFactor = (rangeX + rangeY) / 2.0f * baseFactor;
-
-        float dx = -move.x * zoomFactor;
-        float dy = move.y * zoomFactor;
-
-		// Left-click: Rotate
-		if (AWTMouseUtilities.isLeftDown(e)) {
-			chart.getView().rotate(move.div(100));
-		}
-		// Right-click: Shift (pan)
-		else if (AWTMouseUtilities.isRightDown(e)) {
-			BoundingBox3d newBounds = new BoundingBox3d(
-					currentBounds.getXmin() + dx, currentBounds.getXmax() + dx,
-					currentBounds.getYmin() + dy, currentBounds.getYmax() + dy, currentBounds.getZmin(),
-					currentBounds.getZmax()
-					);
-
-			view.setBoundManual(newBounds);
-			
-		}
-
-		prevMouse = mouse;
-		chart.render();
-	}
-	
-}*/

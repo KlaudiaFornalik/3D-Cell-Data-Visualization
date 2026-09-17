@@ -27,38 +27,19 @@ public class version3Culling {
 	static Coord3dColors[] pointsArray;
 	static Quality q = Quality.Advanced();
 	static SwingChartFactory factory = new SwingChartFactory();
-	//static AWTChartFactory factory = new AWTChartFactory();
 	static Chart chart ;//= factory.newChart(q);
-	//static Chart chart = AWTChartFactory.chart(Quality.Advanced());
 
 	static final int NO_COLOR = -1;
 
 	public static void main(String[] args) {
-		// random data for referance
-		/*
-		 * float x, y, z; Random rand = new Random(); for (int i = 0; i < 1000; i++) { x
-		 * = rand.nextFloat() * 10; y = rand.nextFloat() * 10; z = rand.nextFloat() *
-		 * 10; coordinates.add(new Coord3dColors(x, y, z)); } for (int i = 0; i <
-		 * coordinates.size(); i++) { System.out.println( "x = " + coordinates.get(i).x
-		 * + " y = " + coordinates.get(i).y + " z = " + coordinates.get(i).z); }
-		 */
 		chart = factory.newChart(q);
 		chart.setAnimated(false);
 
 		
 		chart.getView().setBackgroundColor(Color.WHITE);
-		// chart.addMouse();
 		chart.addController(new UniformChartMouseController(chart));
 		
 		initColorGradient();
-		
-
-//		chart.getView().addViewPointChangedListener(view -> {
-//		    if(!coordinates.isEmpty()) {
-//		    	generowanieWykresu(); // Redraw chart on camera move
-//		    System.out.println("View point changed");
-//		    }
-//		});
 		
 		// swing frame
 		JFrame frame = new JFrame("wizualizacja");
@@ -72,14 +53,9 @@ public class version3Culling {
 		buttonPanel.add(wykresButton);
 		buttonPanel.add(widocznoscOsiButton);
 
-		//JLabel label = new JLabel("Ścieżka do pliku:");
-		//label.setHorizontalTextPosition(JLabel.CENTER);
-		//label.setVerticalTextPosition(JLabel.CENTER);
-
 		JPanel controlPanel = new JPanel();
 		controlPanel.setLayout(new GridLayout(2, 1));
 		controlPanel.add(buttonPanel);
-		//controlPanel.add(label);
 
 		daneButton.addActionListener(new ActionListener() {
 			@Override
@@ -92,10 +68,6 @@ public class version3Culling {
 
 				if (returnValue == JFileChooser.APPROVE_OPTION) {
 					File wybranyPlik = fileChooser.getSelectedFile();
-					// JOptionPane.showMessageDialog(frame, "Wybrano plik: " +
-					// wybranyPlik.getAbsolutePath());
-					//label.setForeground(java.awt.Color.RED);
-					//label.setText(wybranyPlik.getAbsolutePath());
 
 					if (!wybranyPlik.getName().toLowerCase().endsWith(".dat")) {
 						JOptionPane.showMessageDialog(frame, "Spróbuj ponownie. Wybierz plik .dat", "Błąd",
@@ -110,10 +82,8 @@ public class version3Culling {
 		wykresButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//label.setForeground(java.awt.Color.GREEN);
 				generowanieWykresu();
 				panel.repaint();
-				//System.out.println("Canvas class: " + chart.getCanvas().getClass().getName());
 
 			}
 		});
@@ -137,11 +107,7 @@ public class version3Culling {
 		frame.add(panel);
 		frame.pack();
 		frame.setLocationRelativeTo(null);
-		// frame.setAlwaysOnTop(true);
 		frame.setVisible(true);
-		// frame.toFront();
-		// frame.requestFocus();
-		// frame.setAlwaysOnTop(false);
 	}
 
 	// load data
@@ -168,11 +134,6 @@ public class version3Culling {
 				}
 			}
 			JOptionPane.showMessageDialog(null, "Wczytano " + coordinates.size() + " punktów!");
-			/*
-			 * for (int i = 0; i < coordinates.size(); i++) {
-			 * System.out.print(coordinates.get(i).x + " " + coordinates.get(i).y + " " +
-			 * coordinates.get(i).z + "\n"); }
-			 */
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(null, "Błąd odczytu pliku!", "Błąd", JOptionPane.ERROR_MESSAGE);
 		}
@@ -299,24 +260,9 @@ public class version3Culling {
 			}
 			cube.add(side);
 			side.setWireframeColor(Color.BLACK);
-//			side.setWireframeDisplayed(false);
-//			
-//			
-//	        for (int i = 0; i < face.length; i++) {
-//	            int next = (i + 1) % face.length; 
-//	            Coord3dColors start = vertices[face[i]];
-//	            Coord3dColors end = vertices[face[next]];
-//
-//	            
-//	            LineStrip border = new LineStrip();
-//	            border.add(new Point(start, Color.BLACK));
-//	            border.add(new Point(end, Color.BLACK));
-//	            cube.add(border);
-//	        }
 
 		}
 		}
-		//System.out.println(numberOfCubes + ". num of faces = " + numberOfFaces);
 		return cube;
 	}
 
