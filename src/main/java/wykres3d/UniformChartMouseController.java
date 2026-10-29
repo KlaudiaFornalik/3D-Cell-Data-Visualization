@@ -16,6 +16,8 @@ public class UniformChartMouseController extends AWTCameraMouseController {
 	private Coord2d prevMouse;
 	private long lastRenderTime = 0;
 
+	private static final long RENDER_INTERVAL_NS = 30_000_000L; // 30ms for ~33 FPS
+
 	public UniformChartMouseController(Chart chart) {
 		super(chart);
 		this.chart = chart;
@@ -50,10 +52,9 @@ public class UniformChartMouseController extends AWTCameraMouseController {
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		long now = System.currentTimeMillis();
-		//if (now - lastRenderTime < 16) return; // 60fps
-		if (now - lastRenderTime < 30) return; // 30
-		lastRenderTime = now;
+		long now = System.nanoTime();
+	    if (now - lastRenderTime < RENDER_INTERVAL_NS) return;
+	    lastRenderTime = now;
 
 		Coord2d mouse = new Coord2d(e.getX(), e.getY());
 		Coord2d move = mouse.sub(prevMouse);
